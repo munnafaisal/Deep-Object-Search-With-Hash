@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+/venv/
+/temp/
+/Cropped_Images/
+
 # C extensions
 *.so
 
