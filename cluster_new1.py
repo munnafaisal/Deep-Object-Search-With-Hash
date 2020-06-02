@@ -33,8 +33,14 @@ class hash_search():
 
     def __init__(self,f_range, h_length,type,h_function,n_hashes_per_table,n_of_NN,DSF,TVD):
 
+
+
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
-        self.my_files_1 = sorted(glob.glob('./temp/person/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
+        try:
+            self.my_files_1 = sorted(glob.glob('./temp/person/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
+        except:
+            print(" \n\n The directoty does not exist \n Firstly run 'object_detection_YOLO.py with given video "
+                  +"path as parameter as stated in the readme, then the directory will be created")
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.model = ResNet50(weights='imagenet', pooling=max, include_top=False)
         self.k = 0
@@ -193,14 +199,9 @@ class hash_search():
             imgs, frame = self.objectDetetcion.get_cropped_image()
 
             cv2.imshow(" video frame ", frame)
-            #cv2.waitKey(1)
 
-            k = cv2.waitKey(1)
 
-            if k == 27:
-                break
-
-            elif cv2.waitKey(33) & 0xFF == ord('q'):
+            if cv2.waitKey(1) == ord('q'):
 
 
                 for im in imgs:
@@ -227,6 +228,11 @@ class hash_search():
                         plt.plot()
                         plt.pause(0.00001)
                         #plt.clf()
+
+            k = cv2.waitKey(1)
+
+            if k == 27:
+                break
 
     def modelSelect(self,var):
 
@@ -301,63 +307,71 @@ def main(args):
     svc = hash_search(f_range= 1,h_length=HL,type=HT,h_function=HF,
                       n_hashes_per_table=N_HPT,n_of_NN=N_of_NN,DSF=feature_DSF,TVD= video_path)
 
-    ################## Number of Image to be read from Image ##############
+    #print("\n\n len",len(svc.my_files_1))
 
-    imgRange = args.range
+    if len(svc.my_files_1) ==0:
 
-    ############### Get Feature From Images  ###############
-    print(args.RNF)
+        print(" \n\n The directoty does not exist \n Firstly run 'object_detection_YOLO.py with given video "
+              + "path as parameter as stated in the readme, then the directory will be created \n\n")
 
-    if args.RNF:
+    else:
+        ################## Number of Image to be read from Image ##############
 
-        print("\n Select one of pretrained model for feature extraction \n")
-        print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
-        var = input()
-
-        ############ Select Pretrained Object Detection Model #############
-
-        svc.modelSelect(var)
+        imgRange = args.range
 
         ############### Get Feature From Images  ###############
+        print(args.RNF)
 
-        svc.read_new_features(imgRange,var)
+        if args.RNF:
 
-    else :
+            print("\n Select one of pretrained model for feature extraction \n")
+            print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
+            var = input()
 
-        print("\n Select one of saved features \n")
+            ############ Select Pretrained Object Detection Model #############
 
-        print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
-        var = input()
+            svc.modelSelect(var)
 
-        svc.load_features_from_DB(var)
-        svc.modelSelect(var)
-        #svc.preprocess_all_features()
+            ############### Get Feature From Images  ###############
+
+            svc.read_new_features(imgRange,var)
+
+        else :
+
+            print("\n Select one of saved features \n")
+
+            print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
+            var = input()
+
+            svc.load_features_from_DB(var)
+            svc.modelSelect(var)
+            #svc.preprocess_all_features()
 
 
 
-    end = time.time()
-    print('\n\n time spend: ', (end - start) / 60, ' minutes \n\n')
+        end = time.time()
+        print('\n\n time spend: ', (end - start) / 60, ' minutes \n\n')
 
-    #################### Initiate LSH Hashing ####################
+        #################### Initiate LSH Hashing ####################
 
-    #svc.range = np.array(svc.my_feature).shape[1]
+        #svc.range = np.array(svc.my_feature).shape[1]
 
-    svc.init_lsh()
+        svc.init_lsh()
 
-    ############## Start object hashing ################
+        ############## Start object hashing ################
 
-    svc.hashing_object_images(imgRange)
+        svc.hashing_object_images(imgRange)
 
-    ############## Build Nearest Neighbour #############
+        ############## Build Nearest Neighbour #############
 
-    svc.lsh.build_NN(svc.lsh.hash_keys_array, 500)
+        svc.lsh.build_NN(svc.lsh.hash_keys_array, 500)
 
-    ################## Test Blur Images #################
+        ################## Test Blur Images #################
 
-    svc.test_blur_img(imgRange)
+        svc.test_blur_img(imgRange)
 
-    # print(np.array(svc.my_feature).shape)
-    cv2.destroyAllWindows()
+        # print(np.array(svc.my_feature).shape)
+        cv2.destroyAllWindows()
 
 
 def parse_arguments(argv):
@@ -391,7 +405,7 @@ def parse_arguments(argv):
                         help=' Downsampling Factor ', default=2)
 
     parser.add_argument('--TVD', type=str,
-                        help=' Test Video Path ', default= '/home/faisal/Desktop/Video/Walking_1.mp4')
+                        help=' Test Video Path ', default= '/home/faisal/New_Pycharm_projects/Opencv_TRACKER/drake.mp4')
 
     parser.add_argument('--OID', type=str,
                         help=' Object Image Directory ', default =None)
