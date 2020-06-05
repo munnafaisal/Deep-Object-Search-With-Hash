@@ -33,14 +33,8 @@ class hash_search():
 
     def __init__(self,f_range, h_length,type,h_function,n_hashes_per_table,n_of_NN,DSF,TVD):
 
-
-
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
-        try:
-            self.my_files_1 = sorted(glob.glob('./temp/person/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
-        except:
-            print(" \n\n The directoty does not exist \n Firstly run 'object_detection_YOLO.py with given video "
-                  +"path as parameter as stated in the readme, then the directory will be created")
+        self.my_files_1 = sorted(glob.glob('./temp/person/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.model = ResNet50(weights='imagenet', pooling=max, include_top=False)
         self.k = 0
@@ -110,6 +104,59 @@ class hash_search():
         noise_img = np.array(255 * noise_img, dtype='uint8')
 
         return noise_img
+
+    def add_title(self, imgs):
+
+        titled_imgs = []
+        for index , im in enumerate(imgs):
+
+            # --- Here I created a violet background to include the text ---
+            im = cv2.resize(im ,(200,200))
+
+            if index == 0:
+
+                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= 100)
+                violet = np.zeros((100, im.shape[1], 3), np.uint8)
+                violet[:] = (255, 100, 180)
+
+                vcat = cv2.vconcat((violet, im))
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(vcat, ' QUERY ', (50, 50), font, 1, (0, 0, 0), 3, 0)
+
+            else:
+
+                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=100)
+                violet = np.zeros((100, im.shape[1], 3), np.uint8)
+                violet[:] = (255, 100, 180)
+
+                vcat = cv2.vconcat((violet, im))
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(vcat, str(index), (50, 50), font, 1, (0, 0, 0), 3, 0)
+
+
+
+            titled_imgs.append(vcat)
+
+        return titled_imgs
+
+
+
+    def plot_gallery_2(self,qr_im, images):
+
+        if len(images)>=2:
+
+            all_images = [cv2.resize(imgs,(100,100)) for imgs in images]
+            all_images = np.array(all_images)
+            #combined = cv2.hconcat((all_images[0:5]))
+            combined = cv2.vconcat((cv2.hconcat(all_images[0:4]),cv2.hconcat(all_images[4:8])))
+            #combined = np.hstack(all_images)
+            cv2.imshow("concat", combined)
+            cv2.waitKey(1)
+
+            # for im in images:
+            #     cv2.imshow(" ALL ",im)
+            #     cv2.waitKey(500)
+
 
     def plot_gallery(self,query_img, results):
 
@@ -199,6 +246,7 @@ class hash_search():
             imgs, frame = self.objectDetetcion.get_cropped_image()
 
             cv2.imshow(" video frame ", frame)
+            #cv2.waitKey(1)
 
 
             if cv2.waitKey(1) == ord('q'):
@@ -215,24 +263,30 @@ class hash_search():
                     features = self.get_vgg_feature(im)
                     features = self.preprocess_current_feature(features)
 
-                    print(features.shape)
+                    #print(features.shape)
 
                     result = self.query_image(img_feature=features)
 
+                    gallery_images = []
+                    gallery_images.append(im)
 
-                    if cv2.waitKey(0) :
+                    for img in result:
+
+                        gallery_images.append(cv2.imread(img[0]))
+
+                    tt = self.add_title(gallery_images)
+
+                    self.plot_gallery_2(qr_im=im,images= tt)
+
+                    if cv2.waitKey(0)==27 :
 
                         #cv2.imshow(" query_image ", im)
                         self.plot_gallery(query_img = im,results=result)
 
+
                         plt.plot()
                         plt.pause(0.00001)
                         #plt.clf()
-
-            k = cv2.waitKey(1)
-
-            if k == 27:
-                break
 
     def modelSelect(self,var):
 
@@ -307,71 +361,63 @@ def main(args):
     svc = hash_search(f_range= 1,h_length=HL,type=HT,h_function=HF,
                       n_hashes_per_table=N_HPT,n_of_NN=N_of_NN,DSF=feature_DSF,TVD= video_path)
 
-    #print("\n\n len",len(svc.my_files_1))
+    ################## Number of Image to be read from Image ##############
 
-    if len(svc.my_files_1) ==0:
+    imgRange = args.range
 
-        print(" \n\n The directoty does not exist \n Firstly run 'object_detection_YOLO.py with given video "
-              + "path as parameter as stated in the readme, then the directory will be created \n\n")
+    ############### Get Feature From Images  ###############
+    print(args.RNF)
 
-    else:
-        ################## Number of Image to be read from Image ##############
+    if args.RNF:
 
-        imgRange = args.range
+        print("\n Select one of pretrained model for feature extraction \n")
+        print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
+        var = input()
+
+        ############ Select Pretrained Object Detection Model #############
+
+        svc.modelSelect(var)
 
         ############### Get Feature From Images  ###############
-        print(args.RNF)
 
-        if args.RNF:
+        svc.read_new_features(imgRange,var)
 
-            print("\n Select one of pretrained model for feature extraction \n")
-            print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
-            var = input()
+    else :
 
-            ############ Select Pretrained Object Detection Model #############
+        print("\n Select one of saved features \n")
 
-            svc.modelSelect(var)
+        print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
+        var = input()
 
-            ############### Get Feature From Images  ###############
-
-            svc.read_new_features(imgRange,var)
-
-        else :
-
-            print("\n Select one of saved features \n")
-
-            print(" 1:Resnet50\n 2:VGG19\n 3:MobilenetSSD\n")
-            var = input()
-
-            svc.load_features_from_DB(var)
-            svc.modelSelect(var)
-            #svc.preprocess_all_features()
+        svc.load_features_from_DB(var)
+        svc.modelSelect(var)
+        #svc.preprocess_all_features()
 
 
 
-        end = time.time()
-        print('\n\n time spend: ', (end - start) / 60, ' minutes \n\n')
+    end = time.time()
+    print('\n\n time spend: ', (end - start) / 60, ' minutes \n\n')
 
-        #################### Initiate LSH Hashing ####################
+    #################### Initiate LSH Hashing ####################
 
-        #svc.range = np.array(svc.my_feature).shape[1]
+    #svc.range = np.array(svc.my_feature).shape[1]
 
-        svc.init_lsh()
+    svc.init_lsh()
 
-        ############## Start object hashing ################
+    ############## Start object hashing ################
 
-        svc.hashing_object_images(imgRange)
+    svc.hashing_object_images(imgRange)
 
-        ############## Build Nearest Neighbour #############
+    ############## Build Nearest Neighbour #############
 
-        svc.lsh.build_NN(svc.lsh.hash_keys_array, 500)
+    svc.lsh.build_NN(svc.lsh.hash_keys_array, 500)
 
-        ################## Test Blur Images #################
+    ################## Test Blur Images #################
 
-        svc.test_blur_img(imgRange)
+    svc.test_blur_img(imgRange)
 
-        # print(np.array(svc.my_feature).shape)
-        cv2.destroyAllWindows()
+    # print(np.array(svc.my_feature).shape)
+    cv2.destroyAllWindows()
 
 
 def parse_arguments(argv):
@@ -418,7 +464,7 @@ def parse_arguments(argv):
 
     return parser.parse_args(argv)
 
-# python cluster_new1.py --range 200 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --RNF True
+# python start.py --range 200 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --RNF True
 
 if __name__ == '__main__':
     main(parse_arguments(sys.argv[1:]))
