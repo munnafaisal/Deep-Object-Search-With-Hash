@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (camera-live-streaming-master)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.7 (New_Face_Detector)" project-jdk-type="Python SDK" />
+>>>>>>> 6c2bc56858d0b33ff9dfe8ced594253f2a9a0289
 </project>

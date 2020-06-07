@@ -106,6 +106,59 @@ class hash_search():
 
         return noise_img
 
+    def add_title(self, imgs):
+
+        titled_imgs = []
+        for index , im in enumerate(imgs):
+
+            # --- Here I created a violet background to include the text ---
+            im = cv2.resize(im ,(200,200))
+
+            if index == 0:
+
+                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= 100)
+                violet = np.zeros((100, im.shape[1], 3), np.uint8)
+                violet[:] = (255, 100, 180)
+
+                vcat = cv2.vconcat((violet, im))
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(vcat, ' QUERY ', (50, 50), font, 1, (0, 0, 0), 3, 0)
+
+            else:
+
+                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=100)
+                violet = np.zeros((100, im.shape[1], 3), np.uint8)
+                violet[:] = (255, 100, 180)
+
+                vcat = cv2.vconcat((violet, im))
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(vcat, str(index), (50, 50), font, 1, (0, 0, 0), 3, 0)
+
+
+
+            titled_imgs.append(vcat)
+
+        return titled_imgs
+
+
+
+    def plot_gallery_2(self,qr_im, images):
+
+        if len(images)>=2:
+
+            all_images = [cv2.resize(imgs,(100,100)) for imgs in images]
+            all_images = np.array(all_images)
+            #combined = cv2.hconcat((all_images[0:5]))
+            combined = cv2.vconcat((cv2.hconcat(all_images[0:4]),cv2.hconcat(all_images[4:8])))
+            #combined = np.hstack(all_images)
+            cv2.imshow("concat", combined)
+            cv2.waitKey(1)
+
+            # for im in images:
+            #     cv2.imshow(" ALL ",im)
+            #     cv2.waitKey(500)
+
+
     def plot_gallery(self,query_img, results):
 
         h = 100
@@ -202,13 +255,7 @@ class hash_search():
             cv2.imshow(" video frame ", frame)
             #cv2.waitKey(1)
 
-            # k = cv2.waitKey(1)
-            #
-            # if k == 27:
-            #     break
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-
+            if cv2.waitKey(1) == ord('q'):
 
                 for im in imgs:
 
@@ -221,15 +268,26 @@ class hash_search():
                     features = self.get_vgg_feature(im)
                     features = self.preprocess_current_feature(features)
 
-                    print(features.shape)
+                    #print(features.shape)
 
                     result = self.query_image(img_feature=features)
 
+                    gallery_images = []
+                    gallery_images.append(im)
 
-                    if cv2.waitKey(0) :
+                    for img in result:
+
+                        gallery_images.append(cv2.imread(img[0]))
+
+                    tt = self.add_title(gallery_images)
+
+                    self.plot_gallery_2(qr_im=im,images= tt)
+
+                    if cv2.waitKey(0)==27 :
 
                         #cv2.imshow(" query_image ", im)
                         self.plot_gallery(query_img = im,results=result)
+
 
                         plt.plot()
                         plt.pause(0.00001)
@@ -409,7 +467,7 @@ def parse_arguments(argv):
 
     return parser.parse_args(argv)
 
-# python cluster_new1.py --range 200 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --RNF True
+# python start.py --range 200 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --RNF True
 
 if __name__ == '__main__':
     main(parse_arguments(sys.argv[1:]))

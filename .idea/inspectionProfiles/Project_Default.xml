@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
     <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
@@ -72,10 +73,23 @@
             <item index="63" class="java.lang.String" itemvalue="mkl-service" />
             <item index="64" class="java.lang.String" itemvalue="pytest-runner" />
             <item index="65" class="java.lang.String" itemvalue="pytest" />
+=======
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="6">
+            <item index="0" class="java.lang.String" itemvalue="2.7" />
+            <item index="1" class="java.lang.String" itemvalue="3.4" />
+            <item index="2" class="java.lang.String" itemvalue="3.5" />
+            <item index="3" class="java.lang.String" itemvalue="3.6" />
+            <item index="4" class="java.lang.String" itemvalue="3.7" />
+            <item index="5" class="java.lang.String" itemvalue="3.8" />
+>>>>>>> 6c2bc56858d0b33ff9dfe8ced594253f2a9a0289
           </list>
         </value>
       </option>
     </inspection_tool>
+<<<<<<< HEAD
     <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
         <list>
@@ -85,5 +99,24 @@
       </option>
     </inspection_tool>
     <inspection_tool class="XmlDuplicatedId" enabled="false" level="ERROR" enabled_by_default="false" />
+=======
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="cupy" />
+            <item index="1" class="java.lang.String" itemvalue="opencv-python" />
+            <item index="2" class="java.lang.String" itemvalue="tqdm" />
+            <item index="3" class="java.lang.String" itemvalue="tensorflow_gpu" />
+            <item index="4" class="java.lang.String" itemvalue="scikit_image" />
+            <item index="5" class="java.lang.String" itemvalue="torch" />
+            <item index="6" class="java.lang.String" itemvalue="tensorflow" />
+            <item index="7" class="java.lang.String" itemvalue="tensorflow-estimator" />
+            <item index="8" class="java.lang.String" itemvalue="tensorboard" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+>>>>>>> 6c2bc56858d0b33ff9dfe8ced594253f2a9a0289
   </profile>
 </component>
