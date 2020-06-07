@@ -20,6 +20,7 @@ import os
 import time
 import glob
 import cv2
+from create_folder import createFolder
 
 
 #video_dir =  '/home/faisal/Desktop/Video/Walking_1.mp4'
@@ -147,7 +148,10 @@ class hash_search():
         features = self.avg_downsample(features)
         return features
 
-
+    def feature_dir(self,fold_dir):
+        dir = "objFeature/" + fold_dir + "/"
+        createFolder(dir)
+        return dir
 
     def read_new_features(self,imgRange,var):
 
@@ -171,13 +175,16 @@ class hash_search():
         self.range = features.shape[0]
 
         if var == '1':
-            np.save('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/Resnet-50/features_resnet-50', self.my_feature)
+            feature_dir= self.feature_dir("features_resnet-50")
+            np.save(feature_dir+'features_resnet-50', self.my_feature)
 
         elif var == '2':
-            np.save('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/VGG-16/features_vgg-16', self.my_feature)
+            feature_dir= self.feature_dir("features_vgg-19")
+            np.save(feature_dir+'features_vgg-19', self.my_feature)
 
         elif var == '3':
-            np.save('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/MobileNet-SSD/features_mobilenet-ssd', self.my_feature)
+            feature_dir= self.feature_dir("features_mobilenet-ssd")
+            np.save(feature_dir+'features_mobilenet-ssd', self.my_feature)
 
 
         cv2.destroyAllWindows()
@@ -195,12 +202,12 @@ class hash_search():
             cv2.imshow(" video frame ", frame)
             #cv2.waitKey(1)
 
-            k = cv2.waitKey(1)
+            # k = cv2.waitKey(1)
+            #
+            # if k == 27:
+            #     break
 
-            if k == 27:
-                break
-
-            elif cv2.waitKey(33) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord('q'):
 
 
                 for im in imgs:
@@ -241,12 +248,12 @@ class hash_search():
 
         print(" Loading features ")
 
-        if var =='1':
-            self.my_feature = np.load('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/Resnet-50/features_resnet-50.npy')
+        if var == '1':
+            self.my_feature = np.load('./objFeature/features_resnet-50/features_resnet-50.npy')
         elif var == '2':
-            self.my_feature = np.load ('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/VGG-16/features_vgg-16.npy')
+            self.my_feature = np.load ('./objFeature/features_vgg-19/features_vgg-19.npy')
         elif var == '3':
-            self.my_feature = np.load('/media/faisal/347b6790-47d5-4813-a0ec-b1ea4b766112/Data_Storage/OFD/MobileNet-SSD/features_mobilenet-ssd.npy')
+            self.my_feature = np.load('./objFeature/features_mobilenet-ssd/features_mobilenet-ssd.npy')
 
         self.range = self.my_feature.shape[1]
 
@@ -391,15 +398,13 @@ def parse_arguments(argv):
                         help=' Downsampling Factor ', default=2)
 
     parser.add_argument('--TVD', type=str,
-                        help=' Test Video Path ', default= '/home/faisal/Desktop/Video/Walking_1.mp4')
+                        help=' Test Video Path ', default= '/home/rafid/Downloads/video-data/drake-hotline_bling.mp4')
 
     parser.add_argument('--OID', type=str,
                         help=' Object Image Directory ', default =None)
 
     parser.add_argument('--OFD', type=str,
                         help=' Object Features Directory ', default=None)
-
-
 
 
     return parser.parse_args(argv)
