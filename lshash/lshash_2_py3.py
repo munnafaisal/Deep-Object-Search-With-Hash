@@ -548,7 +548,7 @@ class LSHash(object):
     @staticmethod
     def normalise_block_euclidean(x,y):
 
-         no_of_block = 128
+         no_of_block = 64
 
          x= x.reshape(-1,no_of_block)
          y= y.reshape(-1,no_of_block)

@@ -7,7 +7,7 @@ __pycache__/
 /temp/
 /objFeature
 /Cropped_Images/
-
+*.npy
 # C extensions
 *.so
 

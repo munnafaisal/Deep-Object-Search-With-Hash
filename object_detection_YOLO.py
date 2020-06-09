@@ -1,4 +1,4 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensornets as nets
 import cv2
 import numpy as np
