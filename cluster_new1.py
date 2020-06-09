@@ -121,9 +121,9 @@ class hash_search():
 
                 vcat = cv2.vconcat((violet, im))
                 font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(vcat, ' QUERY ', (50, 50), font, 1, (0, 0, 0), 3, 0)
-                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= 100)
-
+                #vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, (34,139,34))
+                cv2.putText(vcat, 'QUERY', (50, 50), font, 1, (92, 24, 156), 3, 0)
+                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= (34.0,139.0,34.0))
 
             else:
 
@@ -133,7 +133,7 @@ class hash_search():
                 vcat = cv2.vconcat((violet, im))
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(vcat,"Rank " + str(index), (50, 50), font, 1, (0, 0, 0), 3, 0)
-                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=100)
+                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=(53.0, 152.0, 227.0))
 
 
             titled_imgs.append(vcat)

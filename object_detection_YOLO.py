@@ -67,11 +67,14 @@ class YoloObjectDetection():
 
 
                         crop_img = copy_img[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
+                        cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
+                        cv2.putText(img, lab, (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 255),
+                                    lineType=cv2.LINE_AA)
 
                         img_list.append(crop_img)
 
 
-        return img_list, frame
+        return img_list, img
 
     def crop_and_save(self):
 
