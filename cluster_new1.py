@@ -115,24 +115,24 @@ class hash_search():
 
             if index == 0:
 
-                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= 100)
                 violet = np.zeros((100, im.shape[1], 3), np.uint8)
-                violet[:] = (255, 100, 180)
+                violet[:] = (128, 255, 0)
 
                 vcat = cv2.vconcat((violet, im))
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(vcat, ' QUERY ', (50, 50), font, 1, (0, 0, 0), 3, 0)
+                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value= 100)
+
 
             else:
 
-                im = cv2.copyMakeBorder(im, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=100)
                 violet = np.zeros((100, im.shape[1], 3), np.uint8)
-                violet[:] = (255, 100, 180)
+                violet[:] = (255, 204, 204)
 
                 vcat = cv2.vconcat((violet, im))
                 font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(vcat, str(index), (50, 50), font, 1, (0, 0, 0), 3, 0)
-
+                cv2.putText(vcat,"Rank " + str(index), (50, 50), font, 1, (0, 0, 0), 3, 0)
+                vcat = cv2.copyMakeBorder(vcat, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=100)
 
 
             titled_imgs.append(vcat)
@@ -145,7 +145,7 @@ class hash_search():
 
         if len(images)>=2:
 
-            all_images = [cv2.resize(imgs,(100,100)) for imgs in images]
+            all_images = [cv2.resize(imgs,(100,200)) for imgs in images]
             all_images = np.array(all_images)
             #combined = cv2.hconcat((all_images[0:5]))
             combined = cv2.vconcat((cv2.hconcat(all_images[0:4]),cv2.hconcat(all_images[4:8])))
@@ -238,8 +238,8 @@ class hash_search():
 
     def test_blur_img(self,imgRange):
 
-        plt.figure(figsize=(1.8 * 3, 2.4 * 5))
-        plt.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)
+        # plt.figure(figsize=(1.8 * 3, 2.4 * 5))
+        # plt.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)
 
         while True:
 
@@ -280,13 +280,7 @@ class hash_search():
 
                     if cv2.waitKey(0)==27 :
 
-                        #cv2.imshow(" query_image ", im)
-                        self.plot_gallery(query_img = im,results=result)
-
-
-                        plt.plot()
-                        plt.pause(0.00001)
-                        #plt.clf()
+                        pass
 
     def modelSelect(self,var):
 

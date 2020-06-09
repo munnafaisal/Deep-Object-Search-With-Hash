@@ -26,12 +26,6 @@ class YoloObjectDetection():
 
     def init_tf_session(self):
 
-        #with tf.Graph().as_default():
-
-            # gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.1, allow_growth=False)
-            # self.sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
-            #self.sess = tf.Session()
-
             with tf.Session().as_default() as self.sess:
 
                 self.sess.run(self.model.pretrained())
@@ -162,9 +156,6 @@ def parse_arguments(argv):
 
     parser = argparse.ArgumentParser()
 
-    # parser.add_argument('--video_path', type=str, choices=['TRAIN', 'CLASSIFY'],
-    #                     help='Indicates if a new classifier should be trained or a classification ' +
-    #                          'model should be used for classification', default='CLASSIFY')
 
     parser.add_argument('--video_dir', type=str,
                         help='Path to the data directory containing aligned LFW face patches.')
