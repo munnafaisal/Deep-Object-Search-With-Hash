@@ -1,6 +1,79 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="66">
+            <item index="0" class="java.lang.String" itemvalue="opencv-python" />
+            <item index="1" class="java.lang.String" itemvalue="Flask" />
+            <item index="2" class="java.lang.String" itemvalue="pypiwin32" />
+            <item index="3" class="java.lang.String" itemvalue="scipy" />
+            <item index="4" class="java.lang.String" itemvalue="tensorflow" />
+            <item index="5" class="java.lang.String" itemvalue="h5py" />
+            <item index="6" class="java.lang.String" itemvalue="matplotlib" />
+            <item index="7" class="java.lang.String" itemvalue="imutils" />
+            <item index="8" class="java.lang.String" itemvalue="Keras" />
+            <item index="9" class="java.lang.String" itemvalue="numpy" />
+            <item index="10" class="java.lang.String" itemvalue="dlib" />
+            <item index="11" class="java.lang.String" itemvalue="opencv_python" />
+            <item index="12" class="java.lang.String" itemvalue="absl-py" />
+            <item index="13" class="java.lang.String" itemvalue="protobuf" />
+            <item index="14" class="java.lang.String" itemvalue="helpers" />
+            <item index="15" class="java.lang.String" itemvalue="tensorflow-estimator" />
+            <item index="16" class="java.lang.String" itemvalue="alembic" />
+            <item index="17" class="java.lang.String" itemvalue="greenlet" />
+            <item index="18" class="java.lang.String" itemvalue="scikit-learn" />
+            <item index="19" class="java.lang.String" itemvalue="SQLAlchemy" />
+            <item index="20" class="java.lang.String" itemvalue="Flask-Sockets" />
+            <item index="21" class="java.lang.String" itemvalue="sklearn" />
+            <item index="22" class="java.lang.String" itemvalue="Wand" />
+            <item index="23" class="java.lang.String" itemvalue="mysql-connector-python" />
+            <item index="24" class="java.lang.String" itemvalue="redis" />
+            <item index="25" class="java.lang.String" itemvalue="gevent-websocket" />
+            <item index="26" class="java.lang.String" itemvalue="jdcal" />
+            <item index="27" class="java.lang.String" itemvalue="pyasn1-modules" />
+            <item index="28" class="java.lang.String" itemvalue="XlsxWriter" />
+            <item index="29" class="java.lang.String" itemvalue="utils" />
+            <item index="30" class="java.lang.String" itemvalue="gevent" />
+            <item index="31" class="java.lang.String" itemvalue="mysql" />
+            <item index="32" class="java.lang.String" itemvalue="sockets" />
+            <item index="33" class="java.lang.String" itemvalue="urllib3" />
+            <item index="34" class="java.lang.String" itemvalue="pyparsing" />
+            <item index="35" class="java.lang.String" itemvalue="Flask-Dropzone" />
+            <item index="36" class="java.lang.String" itemvalue="dnspython" />
+            <item index="37" class="java.lang.String" itemvalue="six" />
+            <item index="38" class="java.lang.String" itemvalue="Flask-Uploads" />
+            <item index="39" class="java.lang.String" itemvalue="astor" />
+            <item index="40" class="java.lang.String" itemvalue="et-xmlfile" />
+            <item index="41" class="java.lang.String" itemvalue="tensorboard" />
+            <item index="42" class="java.lang.String" itemvalue="cachetools" />
+            <item index="43" class="java.lang.String" itemvalue="Flask-pymysql" />
+            <item index="44" class="java.lang.String" itemvalue="grpcio" />
+            <item index="45" class="java.lang.String" itemvalue="Mako" />
+            <item index="46" class="java.lang.String" itemvalue="google-auth" />
+            <item index="47" class="java.lang.String" itemvalue="openpyxl" />
+            <item index="48" class="java.lang.String" itemvalue="Pillow" />
+            <item index="49" class="java.lang.String" itemvalue="onnxruntime-gpu" />
+            <item index="50" class="java.lang.String" itemvalue="numba" />
+            <item index="51" class="java.lang.String" itemvalue="filterpy" />
+            <item index="52" class="java.lang.String" itemvalue="keras-vggface" />
+            <item index="53" class="java.lang.String" itemvalue="PyYAML" />
+            <item index="54" class="java.lang.String" itemvalue="llvmlite" />
+            <item index="55" class="java.lang.String" itemvalue="mkl-random" />
+            <item index="56" class="java.lang.String" itemvalue="netron" />
+            <item index="57" class="java.lang.String" itemvalue="mkl-fft" />
+            <item index="58" class="java.lang.String" itemvalue="face-recognition-models" />
+            <item index="59" class="java.lang.String" itemvalue="onnxruntime" />
+            <item index="60" class="java.lang.String" itemvalue="face-recognition" />
+            <item index="61" class="java.lang.String" itemvalue="image-slicer" />
+            <item index="62" class="java.lang.String" itemvalue="split-folders" />
+            <item index="63" class="java.lang.String" itemvalue="mkl-service" />
+            <item index="64" class="java.lang.String" itemvalue="pytest-runner" />
+            <item index="65" class="java.lang.String" itemvalue="pytest" />
+=======
     <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ourVersions">
         <value>
@@ -11,10 +84,22 @@
             <item index="3" class="java.lang.String" itemvalue="3.6" />
             <item index="4" class="java.lang.String" itemvalue="3.7" />
             <item index="5" class="java.lang.String" itemvalue="3.8" />
+>>>>>>> 6c2bc56858d0b33ff9dfe8ced594253f2a9a0289
           </list>
         </value>
       </option>
     </inspection_tool>
+<<<<<<< HEAD
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N812" />
+          <option value="N802" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="XmlDuplicatedId" enabled="false" level="ERROR" enabled_by_default="false" />
+=======
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
@@ -32,5 +117,6 @@
         </value>
       </option>
     </inspection_tool>
+>>>>>>> 6c2bc56858d0b33ff9dfe8ced594253f2a9a0289
   </profile>
 </component>
