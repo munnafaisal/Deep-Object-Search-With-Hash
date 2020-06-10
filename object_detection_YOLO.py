@@ -51,6 +51,7 @@ class YoloObjectDetection():
         boxes1 = np.array(boxes)
 
         img_list = []
+        box_list = []
         for j in self.list_of_classes:
             count = 0
             if str(j) in self.classes:
@@ -67,14 +68,15 @@ class YoloObjectDetection():
 
 
                         crop_img = copy_img[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
-                        cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
-                        cv2.putText(img, lab, (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 255),
-                                    lineType=cv2.LINE_AA)
+                        # cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
+                        # cv2.putText(img, lab, (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 255),
+                        #             lineType=cv2.LINE_AA)
 
                         img_list.append(crop_img)
+                        box_list.append(box)
 
 
-        return img_list, img
+        return box_list,img_list, img
 
     def crop_and_save(self):
 

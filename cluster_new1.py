@@ -250,14 +250,14 @@ class hash_search():
 
         while True:
 
-            imgs, frame = self.objectDetetcion.get_cropped_image()
+            boxes,imgs, frame = self.objectDetetcion.get_cropped_image()
 
-            cv2.imshow(" video frame ", frame)
+            cv2.imshow(" video frame ", cv2.resize(frame,(1000,800)))
             #cv2.waitKey(1)
 
             if cv2.waitKey(1) == ord('q'):
 
-                for im in imgs:
+                for index,  (box,im) in enumerate(zip(boxes,imgs)):
 
                     print(" \n Press Enter ")
                     im = cv2.resize(im, (224, 224))
@@ -281,11 +281,22 @@ class hash_search():
 
                     tt = self.add_title(gallery_images)
 
+                    c_f = frame.copy()
+                    cv2.rectangle(c_f, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
+                    cv2.putText(c_f, 'QUERY', (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (10, 200, 200),
+                                lineType=cv2.LINE_AA)
+
+                    cv2.imshow("query_frame", cv2.resize(c_f, (1000, 800)))
+                    
                     self.plot_gallery_2(qr_im=im,images= tt)
 
                     if cv2.waitKey(0)==27 :
 
                         pass
+
+                cv2.destroyWindow('query_frame')
+
+
 
     def modelSelect(self,var):
 
