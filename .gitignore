@@ -5,8 +5,9 @@ __pycache__/
 
 /venv/
 /temp/
-/objFeature
+objFeature/
 /Cropped_Images/
+
 *.npy
 # C extensions
 *.so
@@ -112,6 +113,7 @@ celerybeat.pid
 env/
 venv/
 ENV/
+objSr/
 env.bak/
 venv.bak/
 
