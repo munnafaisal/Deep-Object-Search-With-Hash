@@ -1,11 +1,11 @@
 # Deep-Object-Search-With-Hash
 
-##A Short Description Of Project
+## A Short Description Of Project
 
 This repo contains object search with hashing techniques using deep features of available pretrained object detection models. It can detect multiple objects from a given video then read features of those objects from a chosen feature extractor. Afterwards those features are transformed into hash codes using LSH(Locality Sensitive Hashing) technique and indexed into a python “Dictionary”.Finally for a given video it takes objects from the video as a query image and displays the close matched images which features have been previously indexed with hash codes.      
 
 
-##Environment Setup:
+## Environment Setup:
 
 
 ### Installation instructions
@@ -55,7 +55,7 @@ _Run the commands in a terminal or command-prompt.
   ```
 
 
-##How to run
+## How to run
 
 After installing all the required libraries run the following commands in the terminal. The details of required input parameters have been described in the following section.
 
@@ -104,17 +104,17 @@ For the first time select Resnet-50 and hit Enter Button then you will see featu
 
 After indexing all features a video(path given in the input arguments) will start to play and press 'Q' to pause the video you will see another gallery window showing Query Image and corresponding Query Results
 
-##Description of Input arguments
+## Description of Input arguments
 
-#####range : 
+##### range : 
 Number of images to be read from directory
 
-#####hash_length : 
+##### hash_length : 
 Length of hash key to be generated from features
-#####type :
+##### type :
 Type of hash keys, currently "Binary and Discrete" hash types are available
 
-#####functions :
+##### functions :
 Type of hash functions
 
     --n_of_HPT :
@@ -139,14 +139,14 @@ Type of hash functions
 	Object Features Directory
 	
 
-##Contacts
+## Contacts
 
     Md. Faisal Ahmed Siddiqi (ahmedfaisal.fa21@gmail.com)
     Anis-Ul-Isalm Rafid (au.i.rafid15@gmail.com)
 
-##Demo Links 
+## Demo Links 
 
-##Acknowledgements 
+## Acknowledgements 
 
  
 
