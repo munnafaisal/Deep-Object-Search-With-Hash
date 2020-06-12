@@ -32,10 +32,10 @@ from create_folder import createFolder
 
 class hash_search():
 
-    def __init__(self,f_range, h_length,type,h_function,n_hashes_per_table,n_of_NN,DSF,TVD):
+    def __init__(self,f_range, h_length,type,h_function,n_hashes_per_table,n_of_NN,DSF,QOC,TVD):
 
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
-        self.my_files_1 = sorted(glob.glob('./temp/car/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
+        #self.my_files_1 = sorted(glob.glob('./temp/car/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.model = ResNet50(weights='imagenet', pooling=max, include_top=False)
         self.k = 0
@@ -48,9 +48,14 @@ class hash_search():
         self.hash_functions_per_table = n_hashes_per_table
         self.number_of_nearest_neighbours = n_of_NN
         self.downsampling_factor = DSF
+        self.query_object_class = QOC
+        path = './temp/'+self.query_object_class + "/*.jpg"
+        self.my_files_1 = sorted(glob.glob(path),key=lambda x: int(x.split("/")[-1].split(".")[0]))
+
 
         self.video_dir = TVD
         self.objectDetetcion = YoloObjectDetection()
+        self.objectDetetcion.query_obj_type = QOC
         self.objectDetetcion.url1 = self.video_dir
         self.objectDetetcion.cap = cv2.VideoCapture(self.objectDetetcion.url1)
         self.objectDetetcion.init_tf_session()
@@ -362,6 +367,7 @@ def main(args):
     N_HPT = args.n_of_HPT
     N_of_NN = args.n_of_NN
     feature_DSF = args.DSF
+    qoc = args.QOC
     video_path = args.TVD
 
     ########### Initiate search Object ######################################
@@ -369,7 +375,7 @@ def main(args):
     #range, h_length, type, h_function, n_hashes_per_table, n_of_NN, DSF
 
     svc = hash_search(f_range= 1,h_length=HL,type=HT,h_function=HF,
-                      n_hashes_per_table=N_HPT,n_of_NN=N_of_NN,DSF=feature_DSF,TVD= video_path)
+                      n_hashes_per_table=N_HPT,n_of_NN=N_of_NN,DSF=feature_DSF,QOC=qoc,TVD= video_path)
 
     ################## Number of Image to be read from Image ##############
 
@@ -459,6 +465,9 @@ def parse_arguments(argv):
 
     parser.add_argument('--DSF', type=int,
                         help=' Downsampling Factor ', default=2)
+
+    parser.add_argument('--QOC', type=str,
+                        help=' Query Object Class ', default='person')
 
     parser.add_argument('--TVD', type=str,
                         help=' Test Video Path ', default= '/home/rafid/Downloads/video-data/drake-hotline_bling.mp4')

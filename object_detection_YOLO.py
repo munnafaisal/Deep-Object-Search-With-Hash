@@ -17,7 +17,7 @@ class YoloObjectDetection():
         self.inputs = tf.placeholder(tf.float32, [None, 416, 416, 3])
         self.model = nets.YOLOv3COCO(self.inputs, nets.Darknet19)
         self.cap = []
-        
+        self.query_obj_type = []
         # model = nets.YOLOv2(inputs, nets.Darknet19)
 
         # frame=cv2.imread("D://pyworks//yolo//truck.jpg",1)
@@ -53,28 +53,32 @@ class YoloObjectDetection():
 
         img_list = []
         box_list = []
+
         for j in self.list_of_classes:
             count = 0
+
             if str(j) in self.classes:
                 lab = self.classes[str(j)]
-            if len(boxes1) != 0:
+
+                if lab == self.query_obj_type:
+
+                    if len(boxes1) != 0:
+
+                        for i in range(len(boxes1[j])):
+
+                            box = boxes1[j][i]
+
+                            if boxes1[j][i][4] >= 0.5:
+                                count += 1
 
 
-                for i in range(len(boxes1[j])):
+                                crop_img = copy_img[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
+                                # cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
+                                # cv2.putText(img, lab, (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 255),
+                                #             lineType=cv2.LINE_AA)
 
-                    box = boxes1[j][i]
-
-                    if boxes1[j][i][4] >= 0.8:
-                        count += 1
-
-
-                        crop_img = copy_img[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
-                        # cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 1)
-                        # cv2.putText(img, lab, (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 255),
-                        #             lineType=cv2.LINE_AA)
-
-                        img_list.append(crop_img)
-                        box_list.append(box)
+                                img_list.append(crop_img)
+                                box_list.append(box)
 
 
         return box_list,img_list, img
