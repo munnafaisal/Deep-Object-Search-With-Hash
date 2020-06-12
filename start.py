@@ -35,7 +35,7 @@ class hash_search():
     def __init__(self,f_range, h_length,type,h_function,n_hashes_per_table,n_of_NN,DSF,TVD):
 
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
-        self.my_files_1 = sorted(glob.glob('./temp/person/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
+        self.my_files_1 = sorted(glob.glob('./temp/car/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.my_files_1 = sorted(glob.glob('./Cropped_Image_2/Cropped_Image/*.jpg'),key=lambda x: int(x.split("/")[-1].split(".")[0]))
         #self.model = ResNet50(weights='imagenet', pooling=max, include_top=False)
         self.k = 0

@@ -17,6 +17,7 @@ class YoloObjectDetection():
         self.inputs = tf.placeholder(tf.float32, [None, 416, 416, 3])
         self.model = nets.YOLOv3COCO(self.inputs, nets.Darknet19)
         self.cap = []
+        
         # model = nets.YOLOv2(inputs, nets.Darknet19)
 
         # frame=cv2.imread("D://pyworks//yolo//truck.jpg",1)
@@ -63,7 +64,7 @@ class YoloObjectDetection():
 
                     box = boxes1[j][i]
 
-                    if boxes1[j][i][4] >= 0.5:
+                    if boxes1[j][i][4] >= 0.8:
                         count += 1
 
 
