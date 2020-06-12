@@ -90,7 +90,7 @@ After the completion of step 1 , run the the following command from terminal
 
 Example :
 ```bash
-python cluster_new1.py --range 350 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --RNF True  --TVD VideoFileDirectory
+python start.py --range 350 --hash_length 48 --type discrete --function pca --n_of_HPT 5 --n_of_NN 20  --DSF 16 --QOC person --RNF True --TVD VideoFileDirectory
  ```
 Options for feature extraction from pretrained models will appear on terminal.
 
@@ -128,6 +128,9 @@ Type of hash functions
 
 	--DSF
 	Downsampling Factor
+	
+	--QOC
+	Query Object Class
 
 	--TVD
 	Test Video Directory/Path
