@@ -4,6 +4,9 @@
 
 This repo contains object search with hashing techniques using deep features of available pretrained object detection models. It can detect multiple objects from a given video then read features of those objects from a chosen feature extractor. Afterwards those features are transformed into hash codes using LSH(Locality Sensitive Hashing) technique and indexed into a python “Dictionary”.Finally for a given video it takes objects from the video as a query image and displays the close matched images which features have been previously indexed with hash codes.      
 
+## Demo Links 
+
+
 ## Acknowledgements 
 
 To learn more about LSH(Locality Sensitive Hashing) 
@@ -161,7 +164,6 @@ Type of hash functions
 
 ## Demo Links 
 
-## Acknowledgements 
 
  
 
