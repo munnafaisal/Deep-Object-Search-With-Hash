@@ -162,8 +162,10 @@ Type of hash functions
 
 ## Contacts
 
-    Md. Faisal Ahmed Siddiqi (ahmedfaisal.fa21@gmail.com)
-    Anis-Ul-Isalm Rafid (au.i.rafid15@gmail.com) [linkedin Profile](https://www.linkedin.com/in/anis-ul-islam-rafid-54s18m/)
+1. Md. Faisal Ahmed Siddiqi (ahmedfaisal.fa21@gmail.com)
+
+2. Anis-Ul-Isalm Rafid (au.i.rafid15@gmail.com)
+    [linkedin Profile](https://www.linkedin.com/in/anis-ul-islam-rafid-54s18m/)
 
 
  
