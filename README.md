@@ -6,9 +6,9 @@ This repo contains object search with hashing techniques using deep features of 
 
 ![Test Image](https://github.com/munnafaisal/Deep-Object-Search-With-Hash/blob/master/Demo_Video/Shotwell%20%20query_result.mp4%20-%203.jpg)
 
-## Demo Links
+## Demo Video Link
 
-[google drive link](https://drive.google.com/file/d/15LqCcMkJmii4LY-Nds70ZwMXON6RDLyA/view?usp=sharing)
+[click here](https://drive.google.com/file/d/15LqCcMkJmii4LY-Nds70ZwMXON6RDLyA/view?usp=sharing)
 
 ## Acknowledgements 
 
