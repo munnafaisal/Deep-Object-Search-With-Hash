@@ -1,4 +1,11 @@
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
+
+k= int(tf.__version__.split('.')[0])
+if k >=2:
+    import tensorflow.compat.v1 as tf
+
+    tf.disable_v2_behavior()
+
 import tensornets as nets
 import cv2
 import numpy as np
