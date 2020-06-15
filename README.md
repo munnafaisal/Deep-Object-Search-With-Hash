@@ -120,7 +120,7 @@ Currently 3 pretrained models are available:
 
 For the first time select Resnet-50 and hit Enter Button then you will see features of object images saved in “temp/person” being extracted and indexed.  
 
-After indexing all features a video(path given in the input arguments) will start to play and press 'Q' to pause the video you will see another gallery window showing Query Image and corresponding Query Results
+After indexing all features a video(path given in the input arguments) will start to play and press 'Q' to pause the video you will see another gallery window showing Query Image and corresponding Query Results. Then again press 'Q' to continue.
 
 ## Description of Input arguments
 
