@@ -8,7 +8,7 @@ This repo contains an object search mechanism with hashing techniques using deep
 
 ## Demo Video Link
 
-[click here](https://drive.google.com/file/d/15LqCcMkJmii4LY-Nds70ZwMXON6RDLyA/view?usp=sharing)
+[click here](https://youtu.be/Cxnqk-bWPCc)
 
 ## Acknowledgements 
 
